@@ -1,3 +1,4 @@
+const Auth = require("../model/auth.model");
 const User = require("../model/user.model");
 const bcrypt = require("bcryptjs");
 
