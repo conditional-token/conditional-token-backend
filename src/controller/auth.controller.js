@@ -35,7 +35,7 @@ exports.login = (req, res) => {
         res.json({
           sucess: true,
           token: token,
-          user: user,
+          user: user.getInfo(),
         });
       } else {
         res.status(401).json({ message: "User not found" });
