@@ -1,3 +1,4 @@
+const Auth = require("../model/auth.model");
 const User = require("../model/user.model");
 const bcrypt = require("bcryptjs");
 
@@ -34,9 +35,7 @@ exports.login = (req, res) => {
         res.json({
           sucess: true,
           token: token,
-          name: user.getName(),
-          _id: user.getId(),
-          isAdmin: user.getIsAdmin(),
+          user: user.getInfo(),
         });
       } else {
         res.status(401).json({ message: "User not found" });
