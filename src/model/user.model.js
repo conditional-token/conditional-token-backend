@@ -75,7 +75,7 @@ user.methods.createUser = function createUser(req) {
 };
 
 user.methods.generatePassWord = function generatePassWord(password) {
-  const hash = bcrypt.hashSync(password, constants.SALT_ROUNDS);
+  const hash = bcrypt.hashSync(password);
   this.password = hash;
 };
 
