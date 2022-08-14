@@ -10,7 +10,7 @@ exports.signup = (req, res) => {
 
     newUser.save(function (error) {
       if (!error) {
-        res.json({ message: "Created User", content: newUser });
+        res.json({ message: "Created User", user: newUser.getInfo() });
       } else if ((error + "").includes("duplicate key error")) {
         res.status(409).json({ message: "Email already exists" });
       } else {
