@@ -1,19 +1,20 @@
 # Conditional Token Backend
 
 Before Start
-
-Run:
-
-    $ cp .env.example .env
-And fill the .env file with variables
+ fill the .env file with variables
 
 ## To Run
+    $ make setup
+    $ make run
 
 
 
+## Api Docs
+Availabe at https://conditional-token-backend.herokuapp.com/docs
 
-    $ yarn install
-    $ yarn start
-
+## Production Environment
 
 The production environment is available at https://conditional-token-backend.herokuapp.com/
+
+## Database
+Fill the BD_URI env with MongoDB instance URI
