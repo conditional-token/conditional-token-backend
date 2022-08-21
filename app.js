@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const router = require("./src/router/index");
+const swaggerUi = require('swagger-ui-express');
 const db = require("./src/config/db");
 
 const port = process.env.PORT;
@@ -32,12 +33,15 @@ app.all("/*", function (req, res, next) {
   next();
 });
 
+swaggerDocument = require('./src/docs/swagger.json');
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function (err, req, res, next) {

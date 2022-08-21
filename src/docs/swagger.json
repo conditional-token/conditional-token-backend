@@ -1,0 +1,169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Conditional Token API"
+  },
+  "host": "conditional-token-backend.herokuapp.com",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Retorna um token de sessão",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "type": "string",
+            "description": "Email do usuário",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "type": "string",
+            "description": "Senha do usuário",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{'success': 'true', 'token': 'Bearer <token>', 'user': '<user_data>'}"
+          },
+          "401": {
+            "description": "{'message': 'User not found'}"
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Retorna o endereço do contrato",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "type": "string",
+            "description": "Email do usuário",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "type": "string",
+            "description": "Senha do usuário",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{'address': '0xb0af2f3733E807de9C05A65f79E8532C8E1722e0'}"
+          }
+        }
+      }
+    },
+    "/account": {
+      "get": {
+        "tags": ["Account"],
+        "summary": "Retorna a conta da carteira do usuário",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "{'accountId': '<id_da_conta>'}"
+          },
+          "400": {
+            "description": "{'message': 'error'}"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Account"],
+        "summary": "Realizar o UPSERT do vinculo entre conta e usuário",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "accountId",
+            "type": "string",
+            "description": "ID da conta do usuário",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{'message': 'Account updated', 'account': '<account_data>'}"
+          },
+          "400": {
+            "description": "{'message': 'error'}"
+          }
+        }
+      }
+    },
+    "/contract/address": {
+      "get": {
+        "tags": ["Contract"],
+        "summary": "Retorna o endereço do contrato",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "{'address': '0xb0af2f3733E807de9C05A65f79E8532C8E1722e0'}"
+          }
+        }
+      }
+    },
+    "/contract/abi": {
+      "get": {
+        "tags": ["Contract"],
+        "summary": "Retorna o ABI do contrato",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "{'abi': 'abi properties'}"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contract": {
+      "required": ["address", "abi"],
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "abi": {
+          "type": "Object"
+        }
+      }
+    },
+    "User": {
+      "required": ["name", "email", "password"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "Object"
+        },
+        "email": {
+          "type": "Object"
+        }
+      }
+    },
+    "Account": {
+      "required": ["accountId", "userID"],
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "userID": {
+          "type": "Object"
+        }
+      }
+    }
+  }
+}
